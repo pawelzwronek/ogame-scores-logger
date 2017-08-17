@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ogame-scores-logger</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body id="index">
+  <div style="text-align:center; padding-top: 10%">
+    <input id="universe" onkeypress="runUniverse(event)"/> <button type="button" onclick="runUniverse()">Run universe</button>
+    <div id="universes"/>
+  </div>
+  <div id="error"></div>
+
+
+  <!--jQuery-->
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+  <!--main-->
+  <script src="/index.js"></script>
+</body>
+</html>

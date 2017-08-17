@@ -1,0 +1,161 @@
+#wrapper {
+    /*width: 100%;*/
+    /*border: 5px solid pink;*/
+}
+
+#players {
+    width:30%;
+    float:left;
+    /*border: 2px solid red;*/
+}
+.graph {
+  float: right; 
+  height: 900px;
+  position: fixed;
+  /*border: 2px solid green;*/
+}
+
+#graphs_selector
+{
+      /* width: 100%; */
+    /* display: table; */
+    /* border: 1px solid black; */
+     margin: 10px; 
+}
+#graphs_selector > span
+{
+     /* display: table-cell;  */
+     margin-right: 5px;
+}
+
+.nofav.fav {
+  background-image: url(/img/table-fav1.png);
+}
+.nofav:hover {
+  background: url(/img/table-fav2.png) no-repeat center;
+}
+.nofav {
+  background: url(/img/table-fav3.png) no-repeat center;
+}
+
+
+
+/* Fix user-agent */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, input {
+  font-family:
+    "HelveticaNeue-Light",
+    "Helvetica Neue Light",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    "Lucida Grande",
+    sans-serif;
+}
+
+ html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  word-wrap: break-word;
+} 
+
+#table > tbody {
+  cursor:default;
+}
+
+
+body#index{
+    background: black;
+    background-image: url(/img/index_bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+#universes {
+    font-family: courier;
+    color: #8aa8e0;
+    text-shadow: 1px 0px 6px #c7cad4;
+    font-size:1em;
+}
+#universes a {
+    color:white;
+    font-weight: 900;
+    font-size:2em;
+    margin: 20px;
+}
+#universes div {
+    margin:20px;
+}
+
+
+/**
+ * Default styles for the dygraphs charting library.
+ */
+
+.dygraph-legend {
+  display: initial;
+  position: relative;
+  font-size: 14px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+
+/* This class is shared by all annotations, including those with icons */
+.dygraph-annotation {
+  position: absolute;
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* This class only applies to annotations without icons */
+/* Old class name: .dygraphDefaultAnnotation */
+.dygraph-default-annotation {
+  border: 1px solid black;
+  background-color: white;
+  text-align: center;
+}
+
+.dygraph-axis-label {
+  /* position: absolute; */
+  /* font-size: 14px; */
+  z-index: 10;
+  line-height: normal;
+  overflow: hidden;
+  color: black;  /* replaces old axisLabelColor option */
+}
+
+.dygraph-axis-label-x {
+}
+
+.dygraph-axis-label-y {
+}
+
+.dygraph-axis-label-y2 {
+}
+
+.dygraph-title {
+  font-weight: bold;
+  z-index: 10;
+  text-align: center;
+  /* font-size: based on titleHeight option */
+}
+
+.dygraph-xlabel {
+  text-align: center;
+  /* font-size: based on xLabelHeight option */
+}

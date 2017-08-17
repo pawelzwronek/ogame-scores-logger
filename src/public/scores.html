@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ogame-scores-logger</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="players">
+      <!-- <div id=debug>debug</div>  -->
+      <div id = "graphs_selector"> 
+        <!-- <span class="in"><input type="checkbox" value="1">Total</span> -->
+      </div>
+      <table id="table" class="compact hover order-column" ></table>
+    </div>
+    
+    <div id="graph0" class="graph"></div> 
+    <div id="graph1" class="graph"></div>
+    <div id="graph2" class="graph"></div>
+  </div>  
+  <!--<div id="wrapper" style="margin-left: 500px;">
+    <div id="players" style="width:500px;float:left;margin-left: -500px;"> 
+      <table id="table" class="compact hover order-column" ></table>
+    </div>
+    
+    <div id="graph" style="float: right; width: 70%; height: 800px; position:fixed;">
+    </div>
+  </div>-->
+
+
+  <!--jQuery-->
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+  <!--DataTables: FixedHeader-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/fh-3.1.2/datatables.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/datatables.css"/>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/fh-3.1.2/datatables.min.js"></script>
+  <!--<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/fc-3.2.2/datatables.js"></script>-->
+
+  <!--Dygraph-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.0.0/dygraph.min.js"></script>
+  <script src="/synchronizer.js"></script>
+  <!--<script src="http://dygraphs.com/2.0.0/dygraph.js"></script>-->
+  <link rel="stylesheet" src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.0.0/dygraph.min.css" />  
+
+  <!--scripts-->
+  <script src="/utils.js"></script>
+  <script src="/scores.js"></script>
+  <script src="/research-thresh.js"></script>
+</body>
+</html>

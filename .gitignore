@@ -1,3 +1,12 @@
+/*universes*
+
+# VisualStudioCod
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
 # Logs
 logs
 *.log
@@ -57,3 +66,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# Windows
+Thumbs.db

@@ -1,2 +1,14 @@
 # ogame-scores-logger
-Server powered by Node.js, fetch every hour player's scores (from Ogame servers) and serve it as a html server.
+Using OgameAPI fetch player's scores every hour and serve it as a html server. Powered by Node.js.
+
+### 1. Fisrt run
+  ```
+  npm install
+  ```
+  ```
+  npm start
+  ```
+  or 
+  ```
+  npm start -- --offline
+  ```

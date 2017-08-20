@@ -93,6 +93,7 @@
             return null;
         var graphData = {};
         var title = playerScoresMap[scoreNo];
+        title === 'Research' ? title += ' <span style="opacity:0.2;">(hover me)</span>' : null;
         var playerIdx = 0;
         labels = ['time'];
         let annotations = [];
@@ -109,7 +110,7 @@
                     });
                     labels.push(player.name);
                     // research annotations
-                    if (title === 'Research') {
+                    if (title.indexOf('Research') !== -1) {
                         $.each(player.scores, (idx, scores) => {
                             if (idx > 0) {
                                 let diff = Number(scores[scoreNo]) - Number(player.scores[idx - 1][scoreNo]); // research points difference
@@ -123,7 +124,8 @@
                                         shortText: 'R',
                                         text: reses.map(r =>
                                             r.res.name + ' ' + r.res.lvl + (r.overshot !== 0 ? '  +' + r.overshot.toFixed(2) + '%' : '')
-                                        ).join('\n')
+                                        ).join('\n'),
+                                        width: 0, height: 0, tickWidth: 0, tickHeight: 0
                                     });
                                 }
                             }
@@ -261,6 +263,34 @@
                 }
             }));
     }
+
+    graphs.forEach((g) => {
+        // g.updateOptions({ clickCallback: function (ev) {
+        //     if (g.isSeriesLocked()) {
+        //         g.clearSelection();
+        //     } else {
+        //         g.setSelection(g.getSelection(), g.getHighlightSeries(), true);
+        //     }
+        // } }, true);
+
+        g.updateOptions({ highlightCallback: function (event, x, points, row, seriesNameev) {
+            let annotations = g.annotations();
+            annotations.forEach((ann) => {
+                let show = (ann.series === seriesNameev);
+                show ? delete ann.width : ann.width = 0;
+                show ? delete ann.height : ann.height = 0;
+                show ? delete ann.tickHeight : ann.tickHeight = 0;
+                show ? delete ann.tickWidth : ann.tickWidth = 0;
+            });
+            if (annotations.length > 0)
+                g.setAnnotations(annotations);
+        } });
+
+        g.updateOptions({ unhighlightCallback: function (event) {
+            g.getOption('highlightCallback')();
+        } });
+    });
+
 
     window.Dygraph.synchronize(graphs, {
         selection: false,

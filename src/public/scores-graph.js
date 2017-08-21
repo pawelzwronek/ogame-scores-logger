@@ -275,6 +275,7 @@
 
         g.updateOptions({ highlightCallback: function (event, x, points, row, seriesNameev) {
             let annotations = g.annotations();
+            let old = JSON.stringify(annotations);
             annotations.forEach((ann) => {
                 let show = (ann.series === seriesNameev);
                 show ? delete ann.width : ann.width = 0;
@@ -282,7 +283,7 @@
                 show ? delete ann.tickHeight : ann.tickHeight = 0;
                 show ? delete ann.tickWidth : ann.tickWidth = 0;
             });
-            if (annotations.length > 0)
+            if (old !== JSON.stringify(annotations))
                 g.setAnnotations(annotations);
         } });
 

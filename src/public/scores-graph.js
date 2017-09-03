@@ -105,7 +105,10 @@
                 if (player.scores) {
                     $.each(player.scores, (__idx, scores) => {
                         var timestamp = scores[0];
-                        if (!graphData[timestamp]) graphData[timestamp] = [];
+                        if (!graphData[timestamp]) {
+                            graphData[timestamp] = [];
+                            graphData[timestamp].length = playerIdx + 1;
+                        }
                         graphData[timestamp][playerIdx] = Number(scores[scoreNo]);
                     });
                     labels.push(player.name);
@@ -139,7 +142,9 @@
         }, this);
         let data = [];
         $.each(graphData, (key, v) => {
-            data.push([new Date(key * 1000)].concat(v));
+            let scores = [new Date(key * 1000)].concat(v);
+            scores.length = playerIdx + 1; // fill missing scores with undefined
+            data.push(scores);
         });
         return { data: data, title: title, annotations: annotations };
     };

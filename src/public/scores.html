@@ -11,8 +11,13 @@
     <div id="players">
       <!-- <div id=debug>debug</div>  -->
       <div id = "graphs_selector"> 
-        <!-- <span class="in"><input type="checkbox" value="1">Total</span> -->
+        <!-- filled with: <span class="in"><input type="checkbox" value="1">Total</span> -->
       </div>
+
+      <div id = "scores_filter">
+          Scores <input id="minScore" type="text" style="width:10%"> to <input id="maxScore" type="text" style="width:11%">
+      </div>
+
       <table id="table" class="compact hover order-column" ></table>
     </div>
     
@@ -41,6 +46,7 @@
   <link rel="stylesheet" type="text/css" href="/datatables.css"/>
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/fh-3.1.2/datatables.min.js"></script>
   <!--<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/fc-3.2.2/datatables.js"></script>-->
+	</script>
 
   <!--Dygraph-->
   <script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/2.0.0/dygraph.min.js"></script>

@@ -7,6 +7,7 @@
     catch(err) { log(err); }
 
     const configKey = 'config';
+    window.global = {};
 
     function getConfig () {
         let cfg = {};
@@ -49,6 +50,17 @@
         rowId: 'id',
         fixedHeader: true,
         stateSave: true,
+        stateSaveParams: function (settings, data) {
+            data['minScore'] = $('#minScore').val();
+            data['maxScore'] = $('#maxScore').val();
+        },
+        stateLoadParams: function (settings, data) {
+            $('#minScore').val(data['minScore']);
+            $('#maxScore').val(data['maxScore']);
+            global['minScore'] = parseNumber(data['minScore']).value;
+            global['maxScore'] = parseNumber(data['maxScore']).value;
+            return true;
+        },
         columns: [
             { title: '', data: 'f', render: favouriteRender },
             { title: 'Id', data: 'id', visible: false },
@@ -169,6 +181,48 @@
         else
             return config.table_fav[uni].indexOf(row.id) >= 0 ? -1 : 0; // favourite on top while sorting
     }
+
+
+
+    function parseNumber (str) {
+        var prefixes = ['', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'];
+        var dividers = [1, 1e3, 1e6, 1e9, 1e12, 1e15, 1e18, 1e21, 1e24];
+        var patt = new RegExp('(\\d+)?([,.])?(\\d*)?([' + prefixes.join('') + '])?','i');
+        var n = (str || '').match(patt);
+        var v = (n[1] || n[3]) ? Number((n[1] || 0) + '.' + (n[3] || 0)) : NaN;
+        v *= n[4] ? dividers[prefixes.indexOf(n[4].toUpperCase())] : 1;
+        return { str: n && n[0] || '', value: v };
+    }
+
+    $('#minScore, #maxScore').keydown(function (e) {
+        setTimeout(() => {
+            if (this.prev && this.prev === this.value)
+                return;
+            var p = parseNumber(this.value);
+            this.value = p.str;
+            this.prev = this.value;
+            this.number = p.value;
+            global[this.id] = p.value;
+            dataTable.state.save();
+            dataTable.draw();
+        }, 0);
+    });
+
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            var min = global['minScore'];
+            var max = global['maxScore'];
+            var score = parseFloat(data[3]); // use data for the age column
+            if ((isNaN(min) && isNaN(max)) ||
+                 (isNaN(min) && score <= max) ||
+                 (min <= score && isNaN(max)) ||
+                 (min <= score && score <= max))
+            {
+                return true;
+            }
+            return false;
+        }
+    );
 
     window.config = config;
     window.dataTable = dataTable;

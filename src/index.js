@@ -2,8 +2,10 @@ require('use-strict');
 
 const fs = require('fs');
 const log = require('./util/logger').Log('srv');
+const logFile = require('./util/logger').Log('srv', 'server.log');
 const _ = require('lodash');
 const universe = require('./universe');
+const ip_reverse = require('./util/ip-reverse').reverseLookup;
 const path = require('path');
 
 const argv = require('minimist')(process.argv.slice(2));
@@ -75,12 +77,17 @@ app.use(compression({ chunkSize: 4096, threshold: 2048 }));
 // Routes
 app.get('/', function (req, res, next) {
     log.info('GET:' + req.originalUrl + ' from: ' + req.ip);
+    ip_reverse(req.ip, (domain, err)=>{
+        if (!err)
+            logFile.info('GET:' + req.originalUrl + ' from: ' + req.ip + '(' + domain + ')');
+    });
     next();
 });
 
 app.use(express.static(public_dir));
 app.get('/uni/:uni/scores', (req, res) => {
     log.info('GET:' + req.originalUrl);
+    logFile.info('GET:' + req.originalUrl + ' from: ' + req.ip);
     if (req.params.uni in universes) {
         var uni = universes[req.params.uni];
         uni.getScores(req.query.id, {
@@ -138,5 +145,20 @@ app.get('/universes', (req, res) => {
     res.json(unis);
 });
 
+app.get('/logs/', (req, res) => {
+    log.info('GET:' + req.originalUrl + ' from: ' + req.ip);
+    logFile.info('GET:' + req.originalUrl + ' from: ' + req.ip);
+    res.sendFile(logFile.fileName);
+});
+
+// // POST /posts
+// app.post('/posts', (req, res) => {
+//     db.get('posts')
+//         .push(req.body)
+//         .last()
+//         .assign({ id: Date.now() })
+//         .write()
+//         .then(post => res.send(post))
+// });
 
 app.listen(8080, '0.0.0.0', () => log.info('Server is listening'));

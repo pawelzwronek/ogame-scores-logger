@@ -13,7 +13,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/index.js | tee -a server_all.log",
+    "start-debug": "node --inspect src/index.js | tee -a server_all.log",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "pawelzwronek",
